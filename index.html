@@ -1759,13 +1759,13 @@
                     <div id="plot-simple" class="plot-tab-content mt-4 space-y-2">
                         <p class="mb-2">ضابطه تابع را وارد کنید (مثلا به جای $x^2 + \sin(x)$ وارد کنید <code>x*x+sin(x)</code>).</p>
                         <div class="flex items-center gap-2">
-                            	<input type="text" id="math-plot-input" class="p-2 border focus:outline-none rounded-lg w-full bg-white text-left" dir="ltr" placeholder="ضابطۀ تابع: f(x) =">
-                            	<button onclick="showPlotterHelp()" class="p-2 focus:outline-none btn-3d help-button font-bold shrink-0" title="راهنما">!</button>
+                            <input type="text" id="math-plot-input" class="p-2 border focus:outline-none rounded-lg w-full bg-white text-left" dir="ltr" placeholder="ضابطۀ تابع: f(x) =">
+                            <button onclick="showPlotterHelp()" class="p-2 focus:outline-none btn-3d help-button font-bold shrink-0" title="راهنما">!</button>
                         </div>
                         <p class="mt-2 mb-2">دامنۀ تابع:</p>
                         <div class="grid grid-cols-2 flex items-center gap-2">
-                            	<input type="number" inputmode="numeric" id="math-plot-xMin" class="p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
-                            	<input type="number" inputmode="numeric" id="math-plot-xMax" class="p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
+                            <input type="number" inputmode="tel" id="math-plot-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
+                            <input type="number" inputmode="tel" id="math-plot-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
                         </div>
                         <button onclick="plotMathFunction()" class="mt-2 p-3 btn-3d btn-green w-full">رسم کن</button>
                         <div id="math-plot-target" class="mt-2 item-center w-full plot-height"></div>
@@ -1792,17 +1792,14 @@
                         <button onclick="addPiecewiseFormula()" class="p-2 btn-3d btn-blue w-full">+ افزودن ضابطه</button>
                         <p class="mt-4 mb-2">دامنۀ نهایی نمودار:</p>
                         <div class="grid grid-cols-2 flex items-center gap-2">
-                        	<input type="number" inputmode="numeric" id="piecewise-xMin" class="p-2 focus:outline-none border rounded-lg w-full bg-white text-center" dir="ltr" placeholder="حداقل x">
-                        	<input type="number" inputmode="numeric" id="piecewise-xMax" class="p-2 focus:outline-none border rounded-lg w-full bg-white text-center" dir="ltr" placeholder="حداکثر x">
-
+                        	<input type="number" inputmode="tel" id="piecewise-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
+                        	<input type="number" inputmode="tel" id="piecewise-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
                         </div>
 
                         <button onclick="plotPiecewiseFunction()" class="mt-2 p-3 btn-3d btn-green w-full">رسم کن</button>
 
                         <div id="math-piecewise-latex" class="text-center my-4 p-3 border rounded-lg bg-gray-100 min-h-[50px] shadow-inner">
-
                         	<span class="text-gray-500">پیش‌نمایش ضوابط تابع</span>
-
                         </div>
 
                         <div id="math-piecewise-target" class="mt-2 item-center w-full h-96"></div>
@@ -1820,8 +1817,8 @@
                         <button id="plotComparisonButton" onclick="addComparisonFormula()" class="p-2 btn-3d btn-blue w-full">+ افزودن تابع</button>
                         <p class="mt-4 mb-2">دامنۀ نهایی نمودار:</p>
                         <div class="grid grid-cols-2 flex items-center gap-2">
-                            	<input type="number" inputmode="numeric" id="comparison-xMin" class="p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
-                            	<input type="number" inputmode="numeric" id="comparison-xMax" class="p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
+                            	<input type="number" inputmode="tel" id="comparison-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
+                            	<input type="number" inputmode="tel" id="comparison-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
 
                         </div>
 
@@ -1956,11 +1953,11 @@
                     </div>
                 </div>
                 <div id="math-tool-gcd-lcm" class="math-tool hidden bg-white p-4 rounded-lg shadow">
-                    <p class="mb-2"><b>ب.م.م (بزرگ‌‌ترین مقسوم‌ٌعلیه مشترک):</b> بزرگترین عددی که هر دو عدد بر آن بخش‌پذیر باشند $(x,y,...)$.</p>
-                    <p class="mb-4"><b>ک.م.م (کوچک‌ترین مضرب مشترک):</b> کوچکترین عددی که بر هر دو عدد بخش‌پذیر باشد $[x,y,...]$.</p>
+                    <p class="mb-2 justify"><b>ب.م.م (بزرگ‌‌ترین مقسوم‌ٌعلیه مشترک):</b> بزرگترین عددی که هر دو عدد بر آن بخش‌پذیر باشند $(x,y,...)$.</p>
+                    <p class="mb-4 justify"><b>ک.م.م (کوچک‌ترین مضرب مشترک):</b> کوچکترین عددی که بر هر دو عدد بخش‌پذیر باشد $[x,y,...]$.</p>
                     <p class="text-gray-500 text-center text-sm mb-2">اعداد را با "فاصله" یا "کاما" از هم جدا کنید (مثلاً: 12, 18, 30)</p>
                     <div class="mb-4">
-                        <input type="text" id="gcd-lcm-input" dir="ltr" 
+                        <input type="text" id="gcd-lcm-input" dir="ltr" inputmode="tel" 
                             class="p-3 border focus:outline-none rounded-lg bg-white text-center w-full shadow-sm" 
                             placeholder="12 18 30 ...">
                     </div>
@@ -2003,29 +2000,60 @@
                         <div class="absolute top-2 right-2 text-white text-xs bg-black/50 p-1 rounded">نمای سه‌بعدی تعاملی</div>
                     </div>
                     <div id="v-tooltip" style="position: absolute; display: none; background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 5px; pointer-events: none; font-size: 14px; z-index: 1000;"></div>
-                    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm border-t pt-4 text-gray-600">
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm border-t pt-4 text-gray-700">
                         <div class="bg-blue-50 p-3 rounded-lg">
                             <h4 class="font-bold text-blue-800 mb-2 flex items-center">
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="id-13"></path></svg>
+                                <svg class="w-4 h-4 ml-1" fill="currentColor" stroke="currentColor" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M281.674 253.424c11.553-14.585 24.288-28.14 38.208-40.267l-68.978-69.013c-10.828-10.867-28.404-10.867-39.275 0-10.831 10.831-10.831 28.404 0 39.235l70.046 70.043zM506.013 142.469c0.268 0 0.494 0 0.802 0 9.109 0 18.109 0.571 26.955 1.487l0-93.986c0-15.327-12.432-27.757-27.76-27.757s-27.721 12.429-27.721 27.757l0 93.968c8.846-0.895 17.842-1.469 26.956-1.469 0.27 0 0.534 0 0.762 0zM730.414 253.388l69.971-70.007c10.866-10.831 10.866-28.404 0-39.235-10.794-10.867-28.405-10.867-39.277 0l-69.018 69.013c13.958 12.123 26.695 25.664 38.324 40.227zM213.494 450.225c0-13.403 1.07-26.519 2.633-39.483l-98.682 0c-15.289 0-27.722 12.432-27.722 27.757 0 15.328 12.434 27.757 27.722 27.757l96.393 0c-0.229-5.28-0.345-10.581-0.345-16.033zM894.563 410.745l-98.643 0c1.6 12.964 2.633 26.082 2.633 39.483 0 5.45-0.115 10.753-0.305 16.033l96.315 0c15.332 0 27.722-12.429 27.722-27.757s-12.39-27.757-27.722-27.757zM745.017 638.262c-11.286 16.547-23.218 30.843-34.695 43.77l50.787 50.829c10.868 10.831 28.483 10.831 39.277 0 10.866-10.867 10.866-28.404 0-39.275l-55.37-55.324zM211.627 693.585c-10.831 10.867-10.831 28.404 0 39.275 10.868 10.831 28.448 10.831 39.275 0l50.83-50.863c-11.475-12.889-23.412-27.222-34.699-43.731l-55.403 55.324zM760.039 450.225c0.037-57.556-19.138-110.785-51.438-153.414-28.33-37.442-66.806-66.802-111.379-84.036l0.229-1.222-19.026-5.586c-14.798-4.29-30.051-7.265-45.605-8.867l-2.211-0.246-0.075 0-0.079-0.019c-7.623-0.724-15.557-1.279-23.83-1.279l-1.218 0c-8.276 0-16.207 0.557-23.833 1.279l-0.115 0.019-2.286 0.246c-15.535 1.6-30.791 4.575-45.549 8.867l-18.416 5.374 0.19 1.222c-44.802 17.214-83.505 46.651-111.99 84.244-32.258 42.628-51.438 95.854-51.438 153.414 0 41.274 7.132 75.207 18.227 103.29 16.661 42.114 42.094 70.559 62.533 92.138 10.22 10.754 19.22 19.941 25.317 27.795 6.254 7.892 9.265 13.995 10.141 18.837 4.459 23.565 4.917 53.306 4.917 60.854l0 2.174c0 34.085 27.609 61.617 61.659 61.655l142.51 0c34.092-0.037 61.659-27.609 61.659-61.655l0-2.097c-0.037-7.474 0.458-37.291 4.919-60.893 0.608-3.278 2.058-7.017 4.917-11.591 4.88-7.97 14.11-17.883 25.548-29.819 17.083-17.959 38.815-40.604 56.091-72.805 17.312-32.161 29.703-73.706 29.626-127.882zM701.813 537.676c-13.614 34.336-34.053 57.575-53.763 78.391-9.841 10.411-19.487 20.095-27.911 30.812-8.311 10.562-15.745 22.65-18.606 37.481-5.377 28.94-5.607 59.978-5.638 68.862 0 1.181 0 1.828 0 2.096-0.037 10.295-8.314 18.606-18.608 18.606l-142.51 0c-5.223 0-9.761-2.059-13.194-5.45-3.391-3.434-5.412-7.934-5.412-13.154 0-0.268 0-0.953 0-2.172-0.037-8.957-0.306-39.921-5.682-68.783-1.828-9.797-5.834-18.571-10.674-26.348-8.579-13.612-19.559-24.819-30.889-36.832-17.116-17.842-35.232-37.119-49.341-63.41-14.07-26.309-24.517-59.745-24.557-107.54 0.037-47.947 15.862-91.95 42.706-127.427 26.845-35.442 64.595-62.209 108.175-75.246l5.377-1.638c10.524-2.708 21.315-4.861 32.429-6.026l0.075 0 2.06-0.229c6.519-0.627 12.847-1.03 19.103-1.066l1.105 0.115 1.106-0.076c6.212 0 12.579 0.42 19.063 1.03l-0.079 0 2.137 0.229 0.037 0c11.093 1.163 21.887 3.277 32.372 6.026l5.451 1.638c43.582 13.037 81.329 39.807 108.175 75.246 26.801 35.478 42.666 79.482 42.666 127.427 0.003 36.409-6.094 64.511-15.169 87.446zM532.782 197.107l0.079 0zM479.17 197.107l0 0c0 0 0.037 0 0.075 0l-0.075 0zM576.706 833.825l-141.369 0c-14.604 0-26.499 11.822-26.499 26.539 0 14.564 11.899 26.465 26.499 26.465l141.369 0c14.604 0 26.499-11.899 26.499-26.465 0-14.721-11.899-26.539-26.499-26.539zM576.706 900.704l-141.369 0c-14.604 0-26.499 11.857-26.499 26.464 0 14.678 11.899 26.539 26.499 26.539l141.369 0c14.604 0 26.499-11.857 26.499-26.539 0-14.605-11.899-26.464-26.499-26.464zM518.406 968.116l-72.805 0c0 0.801-0.154 1.561-0.154 2.404 0 14.643 22.498 26.499 43.297 26.499l34.546 0c20.818 0 43.277-11.857 43.277-26.499 0-0.837-0.115-1.6-0.115-2.404l-48.044 0z"  /></svg>
                                 راهنمای تعاملی
                             </h4>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li>با <b>کلیک و کشیدن</b>، زاویه دوربین را تغییر دهید.</li>
-                                <li>با <b>اسکرول (Scroll)</b>، روی بردارها زوم کنید.</li>
-                                <li>با <b>نگه داشتن موس</b> روی هر بردار، مختصات آن را ببینید.</li>
+                            <ul class="list-disc list-inside space-y-1 justify">
+                                <li>با <b>کلیک و کشیدن</b> موس یا انگشت خود، زاویه دوربین را تغییر دهید.</li>
+                                <li>با <b>اسکرول (Scroll)</b> یا کشیدن انگشت خود به بیرون، روی بردارها زوم کنید.</li>
+                                <li>با <b>نگه داشتن موس یا کلیک</b> روی هر بردار، مختصات آن را ببینید.</li>
                                 <li>بردار <span class="text-yellow-600 font-bold">طلایی</span> همواره نتیجه نهایی محاسبه است.</li>
                             </ul>
                         </div>
                         <div class="bg-gray-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-gray-600 mb-2 flex items-center">
+                            <h4 class="font-bold text-black mb-2 flex items-center">
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 نکات ریاضی
                             </h4>
-                            <p class="leading-relaxed">
-                                <b>ضرب داخلی:</b> حاصل یک عدد (اسکالر) است که تصویر یک بردار بر دیگری را نشان می‌دهد.<br>
-                                <b>ضرب خارجی:</b> حاصل برداری است که بر هر دو بردار اولیه <b>عمود</b> است (قانون دست راست).<br>
-                                <b>تفاضل:</b> بردار حاصل از مبدأ به سمت تفاضل مختصات رسم می‌شود.
+                            <p class="leading-relaxed justify">
+                                <b>بردار (Vector):</b> بردار، کمیتی است که اندازه و جهت را با هم دارد (پاره‌خط جهت‌دار).<br>
+                                <b>ضرب داخلی:</b> حاصل یک عدد (اسکالر) است که تصویر یک بردار بر دیگری را نشان می‌دهد و به ما می‌گوید دو بردار چقدر با هم هم‌جهت هستند.<br>
+                                <b>ضرب خارجی:</b> حاصل برداری است که بر هر دو بردار اولیه <b>عمود</b> است (قانون دست راست) و طول این بردار برابر با <b>مساحت متوازی‌الاضلاعی</b> است که این دو بردار می‌سازند.<br>
+                                <b>تفاضل:</b> برآیند بردار اول با قرینۀ بردار[های] بعدی؛ $\vec{a}-\vec{b}=\vec{a}+(-\vec{b})$.
                             </p>
+                        </div>
+                        <div class="bg-blue-50 p-4 md:col-span-2 rounded-lg">
+                            <h4 class="font-bold text-blue-800 mb-3 flex items-center text-base">
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                دانشنامۀ فرمول‌های برداری
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+                                <p class="text-center">
+                                    $$\vec{a} = a_x\hat{i} + a_y\hat{j} + a_z\hat{k} = \begin{bmatrix} {a_x} \\ {a_y} \\ {a_z} \end{bmatrix} = (a_x, a_y, a_z)$$
+                                </p>
+                                <p class="text-center">
+                                    $$|\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}$$
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-x-auto">
+                                <div>
+                                    <p class="font-bold text-blue-700">۱. مختصات برآیند و تفاضل:</p>
+                                    $$\vec{R} = \vec{a} \pm \vec{b} = \begin{bmatrix} {a_x \pm b_x} \\ {a_y \pm b_y} \\ {a_z \pm b_z} \end{bmatrix}$$
+                                    <p class="font-bold text-blue-700 mt-2">۲. بزرگی یا اندازۀ برآیند (قانون کسینوس‌ها):</p>
+                                    $$|\vec{R}| = \sqrt{|\vec{a}|^2 + |\vec{b}|^2 + 2|\vec{a}||\vec{b}|\cos(\theta)}$$
+                                    <p class="font-bold text-blue-700 mt-2">۳. بزرگی تفاضل:</p>
+                                    $$|\vec{D}| = \sqrt{|\vec{a}|^2 + |\vec{b}|^2 - 2|\vec{a}||\vec{b}|\cos(\theta)}$$
+                                </div>
+                                <div>
+                                    <p class="font-bold text-blue-700">۴. ضرب داخلی و زاویه:</p>
+                                    $$\vec{a}\cdot\vec{b} = a_x b_x + a_y b_y + a_z b_z = |\vec{a}||\vec{b}|\cos(\theta) \\ \implies \theta = \cos^{-1}\left(\frac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|}\right)$$
+                                    <p class="font-bold text-blue-700 mt-2">۵. ضرب خارجی:</p>
+                                    $$\vec{a}\times\vec{b} = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ a_x & a_y & a_z \\ b_x & b_y & b_z \end{vmatrix}=\begin{bmatrix} {a_y b_z - a_z b_y} \\ {a_x b_z - a_z b_x} \\ {a_x b_y - a_y b_x} \end{bmatrix} \\ |\vec{a}\times\vec{b}| = |\vec{a}||\vec{b}|\sin(\theta)$$
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4405,8 +4433,8 @@
             }
         });
 
-	const plotColors = ['#15803d', '#2563eb', '#dc2626', '#f97316', '#7c3aed']; // Green, Blue, Red, Orange, Purple
-	const plotColor = ['green', 'blue', 'red', 'orange', 'purple'];
+        const plotColors = ['#15803d', '#2563eb', '#dc2626', '#f97316', '#7c3aed']; // Green, Blue, Red, Orange, Purple
+        const plotColor = ['green', 'blue', 'red', 'orange', 'purple'];
 
         let pieceWiseFormulaCounter = 3;
 
@@ -4426,22 +4454,19 @@
             showMessageBox('راهنمای رسم نمودار', helpText);
         }
 
-	function getPlotDimensions(targetId) {
+	    function getPlotDimensions(targetId) {
             const targetElement = document.getElementById(targetId);
-            
-const rect = targetElement.getBoundingClientRect();
-            
-const plotWidth = rect.width;
-            
-const plotHeight = rect.height;
+            const rect = targetElement.getBoundingClientRect();
+            const plotWidth = rect.width;
+            const plotHeight = rect.height;
             return { plotWidth, plotHeight };
-	}
+        }
 
-	function processFnString(fn) {
+        function processFnString(fn) {
             return fn.replace(/\^/g, '**').replace(/pi/gi, 'PI');
-	}
+        }
 
-	function getDomain(minId, maxId) {
+        function getDomain(minId, maxId) {
             const ixMin = document.getElementById(minId).value;
             const ixMax = document.getElementById(maxId).value;
             let xMin = -6;
@@ -4451,7 +4476,7 @@ const plotHeight = rect.height;
                 xMax = parseFloat(ixMax);
             }
             return [xMin, xMax];
-	}
+	    }
 
         function plotMathFunction() {
             const target = '#math-plot-target';
@@ -4461,13 +4486,13 @@ const plotHeight = rect.height;
 
             const targetElement = document.getElementById('math-plot-target');
             
-const rect = targetElement.getBoundingClientRect();
-            
-const plotWidth = rect.width;
-            
-const plotHeight = rect.height > 0 ? rect.height : 400; // خواندن ارتفاع یا پیش فرض 400
-const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark Mode (روشن) و #15803d برای Light Mode (تیره)
+            const rect = targetElement.getBoundingClientRect();
+                        
+            const plotWidth = rect.width;
+                        
+            const plotHeight = rect.height > 0 ? rect.height : 400; // خواندن ارتفاع یا پیش فرض 400
+            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark Mode (روشن) و #15803d برای Light Mode (تیره)
 
             if (!fn) {
                 showMessageBox('خطا', 'لطفا ضابطه تابع را وارد کنید.');
@@ -4477,20 +4502,14 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             try {
                 // Process string for function-plot
                 let fnString = fn.replace(/\^/g, '**').replace(/pi/gi, 'PI');
-
-		const ixMin = document.getElementById('math-plot-xMin').value;
-
-	        const ixMax = document.getElementById('math-plot-xMax').value;
-
-		let xMin = -6;
-	
-        let xMax = 6;
-	        if (ixMin !== '' && ixMax !== '') {
-	
-            xMin = ixMin;
-	            xMax = ixMax;
-	
-        }
+                const ixMin = document.getElementById('math-plot-xMin').value;
+                const ixMax = document.getElementById('math-plot-xMax').value;
+                let xMin = -6;
+                let xMax = 6;
+                if (ixMin !== '' && ixMax !== '') {
+                    xMin = ixMin;
+                    xMax = ixMax;
+                }
 
                 functionPlot({
                     target: target,
@@ -4509,7 +4528,7 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             }
         }
 
-	function addPiecewiseFormula() {
+	    function addPiecewiseFormula() {
             const container = document.getElementById('piecewise-formulas-container');
             pieceWiseFormulaCounter++;
             const newFormulaDiv = document.createElement('div');
@@ -4533,17 +4552,17 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             newFormulaDiv.querySelector('.piecewise-condition').addEventListener('input', updatePiecewiseLatex);
             newFormulaDiv.querySelector('.piecewise-function').addEventListener('input', updatePiecewiseLatex);
             updatePiecewiseLatex();
-	}
+	    }
 
-	function removePiecewiseFormula(buttonElement) {
+	    function removePiecewiseFormula(buttonElement) {
             const formulaDiv = buttonElement.closest('.piecewise-formula');
             if (formulaDiv) {
                 formulaDiv.remove();
                 updatePiecewiseLatex(); // به روزرسانی لاتک پس از حذف
             }
-	}
+	    }
 
-	function updatePiecewiseLatex() {
+	    function updatePiecewiseLatex() {
             const formulas = document.querySelectorAll('#piecewise-formulas-container .piecewise-formula');
             let latexCode = 'f(x) = \\begin{cases}';
             formulas.forEach((formula, index) => {
@@ -4602,11 +4621,11 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
                 latexTarget.textContent = 'خطا در رندر لاتکس';
                 console.error("Katex error:", e);
             }            
-	}
+	    }
 
-    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark Mode (روشن) و #15803d برای Light Mode (تیره)
-	function plotPiecewiseFunction() {
+        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark Mode (روشن) و #15803d برای Light Mode (تیره)
+        function plotPiecewiseFunction() {
             const { plotWidth, plotHeight } = getPlotDimensions('math-piecewise-target');
             const [xMinGlobal, xMaxGlobal] = getDomain('piecewise-xMin', 'piecewise-xMax');
             const formulas = document.querySelectorAll('#piecewise-formulas-container .piecewise-formula');
@@ -4682,17 +4701,17 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             } catch (err) {
                 showMessageBox('خطای فرمول', 'خطا در رسم نمودار چندضابطه‌ای. ضابطه‌ها را بررسی کنید.');
             }
-	}
+	    }
 
-	document.addEventListener('DOMContentLoaded', () => {
+	    document.addEventListener('DOMContentLoaded', () => {
             const initialPiecewiseInputs = document.querySelectorAll('#piecewise-formulas-container input');
             initialPiecewiseInputs.forEach(input => {
                 input.addEventListener('input', updatePiecewiseLatex);
             });
             updatePiecewiseLatex();
-	});
+	    });
 
-	function addComparisonFormula() {
+	    function addComparisonFormula() {
             const container = document.getElementById('comparison-formulas-container');
             const formulas = document.querySelectorAll('#comparison-formulas-container .comp-function');
             const index = formulas.length;
@@ -4715,9 +4734,9 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             `;
             container.appendChild(newFormulaDiv);
             updateComparisonButtonState();
-	}
+	    }
 
-	function updateComparisonButtonState() {
+	    function updateComparisonButtonState() {
             const formulas = document.querySelectorAll('#comparison-formulas-container .comp-function');
             const button = document.getElementById('plotComparisonButton');
 
@@ -4730,17 +4749,17 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
                 button.classList.remove('opacity-50', 'cursor-not-allowed');
                 button.classList.add('btn-blue');
             }
-	}
+	    }
 
-	function removeComparisonFormula(buttonElement) {
+	    function removeComparisonFormula(buttonElement) {
             const formulaDiv = buttonElement.closest('.comparison-formula');
             if (formulaDiv) {
                 formulaDiv.remove();
             }
             updateComparisonButtonState();
-	}
+        }
 
-	function plotComparisonFunctions() {
+        function plotComparisonFunctions() {
             const { plotWidth, plotHeight } = getPlotDimensions('math-comparison-target');
             const [xMin, xMax] = getDomain('comparison-xMin', 'comparison-xMax');
             const formulas = document.querySelectorAll('#comparison-formulas-container .comp-function');
@@ -4775,15 +4794,33 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             } catch (err) {
                 showMessageBox('خطای فرمول', 'خطا در رسم نمودار توابع مقایسه‌ای.');
             }
-	}
+        }
 
-	document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const piecewiseInputs = document.querySelectorAll('#piecewise-formulas-container input');
             piecewiseInputs.forEach(input => {
                 input.addEventListener('input', updatePiecewiseLatex);
             });
             updatePiecewiseLatex();
-	});
+	    });
+
+        // انتخاب تمام اینپوت‌هایی که کلاس مشخص شده را دارند
+        document.querySelectorAll('.numeric-only').forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value;
+                const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+                const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+                
+                // ۱. تبدیل اعداد
+                for (let i = 0; i < 10; i++) {
+                    value = value.replace(new RegExp(farsiDigits[i], 'g'), i)
+                                .replace(new RegExp(arabicDigits[i], 'g'), i);
+                }
+
+                // ۲. فیلتر کردن کاراکترها (فقط عدد، کاما و فاصله)
+                e.target.value = value.replace(/[^0-9, \s]/g, '');
+            });
+        });
 
         // Divisibility
         function checkDivisibility() {
@@ -5700,6 +5737,20 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             calculateMultiGcdLcm();
         }
     });
+    document.getElementById('gcd-lcm-input').addEventListener('input', function(e) {
+        // ۱. تبدیل اعداد فارسی/عربی به انگلیسی
+        let value = e.target.value;
+        const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+        
+        for (let i = 0; i < 10; i++) {
+            value = value.replace(new RegExp(farsiDigits[i], 'g'), i)
+                        .replace(new RegExp(arabicDigits[i], 'g'), i);
+        }
+
+        // ۲. حذف کاراکترهای غیرمجاز (به جز عدد، فاصله و کاما)
+        e.target.value = value.replace(/[^0-9, \s]/g, '');
+    });
 
     let vectorCount = 2;
     let scene, camera, renderer, arrows = [], controls;
@@ -5752,22 +5803,42 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
         }
     }
 
-    const vectorColors = [
-        0xff4444, // V1: قرمز روشن
-        0x44ff44, // V2: سبز نئونی
-        0x9333ea, // V3: آبی آسمانی
-        0xff00ff, // V4: سرخابی
-        0xffa500, // V5: نارنجی
-        0x00ffff,  // V6: فیروزه‌ای
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        0xffffff
-    ];
+    let vectorColors
+    if (isDarkMode) {
+        vectorColors = [
+            0xff4444, // V1: قرمز روشن
+            0x44ff44, // V2: سبز نئونی
+            0x9333ea, // V3: آبی آسمانی
+            0xff00ff, // V4: سرخابی
+            0xffa500, // V5: نارنجی
+            0x00ffff,  // V6: فیروزه‌ای
+            0xffffff,
+            0xffffff,
+            0xffffff,
+            0xffffff,
+            0xffffff,
+            0xffffff,
+            0xffffff,
+            0xffffff
+        ]
+    } else {
+        vectorColors = [
+            0xff4444, // V1: قرمز روشن
+            0x44ff44, // V2: سبز نئونی
+            0x9333ea, // V3: آبی آسمانی
+            0xff00ff, // V4: سرخابی
+            0xffa500, // V5: نارنجی
+            0x00ffff,  // V6: فیروزه‌ای
+            0x000000,
+            0x000000,
+            0x000000,
+            0x000000,
+            0x000000,
+            0x000000,
+            0x000000,
+            0x000000
+        ]
+    }
 
     // مقداردهی اولیه Three.js
     // اضافه کردن تابع برای تنظیم سایز هنگام باز شدن ابزار
@@ -5895,6 +5966,21 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
         let res = { x: 0, y: 0, z: 0 };
         let latexStr = "";
 
+        // محاسبات پایه برای دو بردار اول
+        const v1 = vecs[0];
+        const v2 = vecs[1];
+        const mag1 = Math.sqrt(v1.x**2 + v1.y**2 + v1.z**2);
+        const mag2 = Math.sqrt(v2.x**2 + v2.y**2 + v2.z**2);
+        const dotProduct = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+        
+        // محاسبه زاویه بین دو بردار
+        let angleDeg = 0;
+        if (mag1 > 0 && mag2 > 0) {
+            let cosTheta = dotProduct / (mag1 * mag2);
+            cosTheta = Math.max(-1, Math.min(1, cosTheta)); // برای جلوگیری از خطای محاسباتی
+            angleDeg = (Math.acos(cosTheta) * 180 / Math.PI).toFixed(3);
+        }
+
         // پاک کردن بردارهای قبلی از صحنه
         arrows.forEach(a => scene.remove(a));
         arrows = [];
@@ -5928,7 +6014,7 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
 
         // اضافه کردن جزئیات اندازه و زاویه به لاتکس
         vecs.forEach((v, i) => {
-            const mag = Math.sqrt(v.x**2 + v.y**2 + v.z**2).toFixed(2);
+            const mag = Math.sqrt(v.x**2 + v.y**2 + v.z**2).toFixed(3);
             let currentColor
             if (isDarkMode) {
                 currentColor = 0xffffff;
@@ -5956,6 +6042,9 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
             }
         });
 
+        // افزودن زاویه به خروجی لاتکس
+        latexStr += `\\\\ \\color{${'#'+(vectorColors[6]).toString(16).padStart(6, '0')}}{\\theta_{(\\vec{V}_1, \\vec{V}_2)} = ${angleDeg}^\\circ}`;
+
         // رسم بردار نتیجه
         if (type !== 'dot') {
             const resMag = Math.sqrt(res.x**2 + res.y**2 + res.z**2);
@@ -5971,7 +6060,7 @@ const plotColour = isDarkMode ? '#4ade80' : '#15803d'; // #4ade80 برای Dark 
                 scene.add(resArrow);
                 arrows.push(resArrow);
             }
-            latexStr += `\\\\ \\color{#ffd700}{|\\vec{R}|} = ${resMag.toFixed(2)}`;
+            latexStr += `\\\\ \\color{#ffd700}{|\\vec{R}|} = ${resMag.toFixed(3)}`;
         }
 
         // نمایش خروجی لاتکس
