@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0KOVEMckDpbCjaWr2Ugeh4/EGactnsCJO8e2i7gqY+2eJV6gwUqML" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 
     <!-- Function Plotter for Graphs -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -35,8 +37,8 @@
     <script type="importmap">
     {
         "imports": {
-        "three": "https://unpkg.com/three@0.150.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.150.0/examples/jsm/"
+            "three": "https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.150.0/examples/jsm/"
         }
     }
     </script>
@@ -45,9 +47,12 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-    // متغیرها را به window متصل می‌کنیم تا در بقیه توابع شما قابل دسترسی باشند
+    // متصل کردن به پنجره برای استفاده در توابع قدیمی شما
     window.THREE = THREE;
     window.OrbitControls = OrbitControls;
+    
+    // اگر تابعی دارید که باید بلافاصله اجرا شود اینجا صدا بزنید
+    console.log("Libraries Loaded Successfully");
     </script>
 
     <!-- Prism.js for Highlight Code Blocks -->
