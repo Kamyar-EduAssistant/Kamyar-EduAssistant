@@ -76,6 +76,18 @@
             background-color: #f8fafc52; /* A slightly off-white for better viewing */
         }
 
+        .bg-AIInput {
+            background-color: #FFFFFF;
+            border: 1px solid #E1E3E1;
+            transition: box-shadow 0.2s;
+        }
+        .bg-AIOutput {
+            background-color: #FFFFFF;
+            --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        }
+
         /* General button style */
         .btn-3d {
             border-radius: 12px;
@@ -123,11 +135,13 @@
         }
 
         .help-button {
-            background-color: #808080;
-            color: white;
-            width: 25px;
-            height: 25px;
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #333;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -149,7 +163,7 @@
         }
 
         .help-button:hover {
-            background-color: #343A40;
+            background-color: #333;
             color: white;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             transform: scale(1.1);
@@ -175,12 +189,14 @@
         }
 
     	.fadeIn-active {
-	
             animation: fadeIn 0.5s ease-out forwards;
 	    }
 
         .wipeLeft {
             animation: wipeLeft 0.5s ease-out forwards;
+        }
+        .popIn {
+            animation: popIn 0.5s ease-out forwards;
         }
         
         /* Splash Screen Animation */
@@ -405,7 +421,7 @@
 
         @media (prefers-color-scheme: dark) {
             body {
-            	background-color: #1b1c1d ; /* پس‌زمینه تیره */
+            	background-color: #131314 ; /* پس‌زمینه تیره */
             	color: #ffffff; /* متن روشن */
                 scrollbar-color: #444 #1a1a1a;
             }
@@ -417,6 +433,14 @@
             }
             #splash-screen p {
             	color: #86efac; /* رنگ سبز بسیار روشن یا سفید */
+            }
+            .bg-AIInput {
+                background-color: #1E1F20;
+                border: 1px #1E1F20;
+            }
+            .bg-AIOutput {
+                background: none;
+                box-shadow: none;
             }
             .btn-gray {
             	background-color: #475569; /* خاکستری تیره */
@@ -777,27 +801,29 @@
                     این بخش با استفاده از هوش مصنوعی KamiAI مسائل پیچیده شما را حل می‌کند.
                 </p>
             </div>
-            <div class="flex flex-col items-center bg-white border rounded-lg shadow-inner p-1">
+
+            <div class="flex flex-col bg-AIInput rounded-3xl shadow-lg p-2">
+                <!-- File Preview Container -->
+                <div id="file-preview-container" class="flex w-full justify-between hidden items-center justify-between p-2 rounded-xl bg-gray-100 self-right">
+                    <div class="flex items-center gap-2 overflow-hidden">
+                        <img id="file-preview-image" src="" alt="Preview" class="w-16 h-16 object-cover rounded">
+                        <span id="file-preview-name" class="text-sm text-gray-700 truncate"></span>
+                    </div>
+                    <button onclick="cancelFile()" title="لغو فایل" class="p-1 text-red-500 hover:text-red-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
                 <textarea id="ai-input" class="justify flex-grow w-full p-4 bg-transparent focus:outline-none resize-none text-slate-800 self-center" data-gramm="false" contenteditable="true" role="textbox" aria-multiline="true" max-row="7" placeholder="مسئله خود را وارد کنید..." rows="1" style="overflow: hidden;"></textarea>
                 <div class="flex w-full justify-between items-center px-2">
-                	<button title="ضمیمه کردن فایل" onclick="document.getElementById('file-input').click()" class="mb-2 p-2 btn-3d rounded-full self-right bg-white text-gray-500 hover:text-slate-900">
+                	<button title="ضمیمه کردن فایل" onclick="document.getElementById('file-input').click()" class="mb-2 p-2 btn-3d rounded-full self-right bg-AIInput text-gray-500 hover:text-slate-900">
 	                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-paperclip"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
 	                </button>
                 	<input type="file" id="file-input" class="hidden" accept="image/*">
                 	<button onclick="solveWithAI(false)" title="بپرس" class="mb-2 p-2 btn-3d btn-green text-xl h-full rounded-full self-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"  viewBox="0 0 2200 2200"><g transform="scale(2.25) translate(-1050, -150)"><path style="fill:#FFFFFF;" d="M1346.535,606.039c2.16,4.919,2.16,10.561,0,15.479l-117.291,267.063		c-9.539,21.723-4.693,46.429,12.349,62.936c10.795,10.455,24.719,15.916,38.917,15.916c8.219,0,16.531-1.83,24.38-5.581		l622.408-297.39c19.711-9.418,31.955-28.838,31.955-50.683c0-21.845-12.244-41.266-31.955-50.684l-622.407-297.39		c-21.409-10.229-46.254-6.173-63.298,10.335c-17.043,16.508-21.89,41.211-12.349,62.936L1346.535,606.039z M1267.282,302.563		c1.64-1.587,6.434-5.566,13.233-5.566c2.556,0,5.395,0.563,8.456,2.025l622.408,297.39c6.855,3.276,10.949,9.768,10.949,17.367		H1385.07c0-7.705-1.576-15.41-4.729-22.588l-117.291-267.063C1258.058,312.758,1265.027,304.747,1267.282,302.563z"/></g></svg></button>
                 </div>
             </div>
-            <!-- File Preview Container -->
-            <div id="file-preview-container" class="mt-2 hidden items-center justify-between p-2 bg-gray-100 rounded-lg">
-                <div class="flex items-center gap-2 overflow-hidden">
-                    <img id="file-preview-image" src="" alt="Preview" class="w-10 h-10 object-cover rounded">
-                    <span id="file-preview-name" class="text-sm text-gray-700 truncate"></span>
-                </div>
-                <button onclick="cancelFile()" title="لغو فایل" class="p-1 text-red-500 hover:text-red-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </div>
-            <div class="relative bg-white p-4 rounded-lg shadow min-h-[100px] mt-6">
+
+            <div class="relative p-4 bg-AIOutput rounded-xl min-h-[100px] mt-6">
                  <div id="ai-output" dir="auto" class="justify">
                     <p class="text-gray-500 text-center">پاسخ در اینجا نمایش داده می‌شود...</p>
                  </div>
@@ -913,7 +939,7 @@
                  </div>
              </div>
 
-             <div id="plot-container" class="my-6 item-center bg-white mb-2 rounded-lg shadow hidden"></div>
+             <div id="plot-container" class="my-6 item-center bg-white mb-2 rounded-lg shadow plot-height hidden"></div>
              <div id="kami-output" dir="auto" class="justify bg-white p-4 rounded-lg shadow min-h-[150px] mt-6" prose prose-slate max-w-none text-justify">
                  <p class="text-gray-500 text-center">پاسخ KamiAI در اینجا نمایش داده می‌شود...</p>
              </div>
@@ -1001,13 +1027,7 @@
                 <!-- Pythagorean Theorem -->
                 <div id="pythagorean-theorem" class="math-tool hidden bg-white p-4 rounded-lg shadow">
                     <p class="mb-4 text-center"><b>قضیۀ فیثاغورس:</b> در یک مثلث قائم‌الزاویه، مربع طول وتر (ضلع روبروی زاویه 90 درجه که بلندترین ضلع مثلث است) برابر است با مجموع مربع طول دو ضلع دیگر (که به آن‌ها ساق گفته می‌شود).</p>
-                    <svg class="w-60 h-45 mb-4 text-green-700 mx-auto" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg"><polygon points="50,20 50,220 250,220" style="fill:none; stroke:#15803d; stroke-width:3;" /><rect x="50" y="200" width="20" height="20"
- style="fill:none; stroke:#e74c3c; stroke-width:2;" /><text x="30" y="120" font-family="Cambria Math" font-size="18" fill="#2c3e50" text-anchor="middle">a</text><text x="150" y="245" font-family="Cambria Math" font-size="18" fill="#2c3e50" text-anchor="middle">b</text>
-
-<text x="150" y="100" font-family="Cambria Math" font-size="18" fill="#2c3e50" text-anchor="middle">c</text><circle cx="50" cy="20" r="4" fill="#34495e" />
-<circle cx="50" cy="220" r="4" fill="#34495e" /><circle cx="250" cy="220" r="4" fill="#34495e" /><text x="40" y="15" font-family="Cambria Math" font-size="14" fill="#34495e">A</text><text x="40" y="230" font-family="Cambria Math" font-size="14" fill="#34495e">B</text><text x="260" y="230" font-family="Cambria Math" font-size="14" fill="#34495e">C</text>
-
-</svg>
+                    <svg class="w-60 h-45 mb-4 text-green-700 mx-auto" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg"><polygon points="50,20 50,220 250,220" style="fill:none; stroke:#15803d; stroke-width:3;" /><rect x="50" y="200" width="20" height="20" style="fill:none; stroke:#e74c3c; stroke-width:2;" /><text x="30" y="120" font-family="Cambria Math" font-size="18" fill="#2c3e50" text-anchor="middle">a</text><text x="150" y="245" font-family="Cambria Math" font-size="18" fill="#2c3e50" text-anchor="middle">b</text><text x="150" y="100" font-family="Cambria Math" font-size="18" fill="#2c3e50" text-anchor="middle">c</text><circle cx="50" cy="20" r="4" fill="#34495e" /><circle cx="50" cy="220" r="4" fill="#34495e" /><circle cx="250" cy="220" r="4" fill="#34495e" /><text x="40" y="15" font-family="Cambria Math" font-size="14" fill="#34495e">A</text><text x="40" y="230" font-family="Cambria Math" font-size="14" fill="#34495e">B</text><text x="260" y="230" font-family="Cambria Math" font-size="14" fill="#34495e">C</text></svg>
                     <p class="text-center text-lg mb-4">$a^2 + b^2 = c^2$</p>
                     <p class="mb-2 text-center">اندازه دو ضلع مثلث قائم‌الزاویه را وارد کنید تا ضلع سوم محاسبه شود.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1763,18 +1783,21 @@
                     </div>
 
                     <div id="plot-simple" class="plot-tab-content mt-4 space-y-2">
-                        <p class="mb-2">ضابطه تابع را وارد کنید (مثلا به جای $x^2 + \sin(x)$ وارد کنید <code>x*x+sin(x)</code>).</p>
+                        <p class="mb-2 justify">ضابطه تابع را وارد کنید (مثلا به جای $x^2 + \sin(x)$ وارد کنید <code>x*x+sin(x)</code>).</p>
                         <div class="flex items-center gap-2">
-                            <input type="text" id="math-plot-input" class="p-2 border focus:outline-none rounded-lg w-full bg-white text-left" dir="ltr" placeholder="ضابطۀ تابع: f(x) =">
+                            <input type="text" id="math-plot-input" oninput="updateSimpleLatex()" class="p-2 border focus:outline-none rounded-lg w-full bg-white text-left" dir="ltr" placeholder="ضابطۀ تابع: f(x) =">
                             <button onclick="showPlotterHelp()" class="p-2 focus:outline-none btn-3d help-button font-bold shrink-0" title="راهنما">!</button>
                         </div>
                         <p class="mt-2 mb-2">دامنۀ تابع:</p>
                         <div class="grid grid-cols-2 flex items-center gap-2">
-                            <input type="number" inputmode="tel" id="math-plot-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
-                            <input type="number" inputmode="tel" id="math-plot-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
+                            <input type="number" inputmode="numeric" id="math-plot-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
+                            <input type="number" inputmode="numeric" id="math-plot-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
                         </div>
                         <button onclick="plotMathFunction()" class="mt-2 p-3 btn-3d btn-green w-full">رسم کن</button>
-                        <div id="math-plot-target" class="mt-2 item-center w-full plot-height"></div>
+                        <div id="math-simple-latex" class="text-center my-4 p-3 border rounded-lg bg-gray-100 min-h-[50px] shadow-inner flex items-center justify-center relative">
+                            <span class="text-gray-500">پیش‌نمایش فرمول تابع</span>
+                        </div>
+                        <div id="math-plot-target" class="mt-2 item-center w-full plot-height popIn"></div>
                     </div>
 
                     <div id="plot-piecewise" class="plot-tab-content mt-4 space-y-2 hidden">
@@ -1786,9 +1809,7 @@
                             		<span class="font-bold text-slate-900">آنگاه</span>
                             		<input type="text" class="piecewise-function p-2 border focus:outline-none bg-white rounded-lg text-left w-2/3" dir="ltr" placeholder="ضابطه (مثلاً -x)">
                         	</div>
-
                         	<div class="piecewise-formula flex items-center gap-2 border p-3 rounded-lg bg-gray-50">
-
                             		<span class="font-bold text-slate-900">اگر</span>
                             		<input type="text" class="piecewise-condition p-2 border focus:outline-none rounded-lg bg-white text-left w-1/3" dir="ltr" placeholder="شرط (مثلاً x>=0)">
                             		<span class="font-bold text-slate-900">آنگاه</span>
@@ -1798,8 +1819,8 @@
                         <button onclick="addPiecewiseFormula()" class="p-2 btn-3d btn-blue w-full">+ افزودن ضابطه</button>
                         <p class="mt-4 mb-2">دامنۀ نهایی نمودار:</p>
                         <div class="grid grid-cols-2 flex items-center gap-2">
-                        	<input type="number" inputmode="tel" id="piecewise-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
-                        	<input type="number" inputmode="tel" id="piecewise-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
+                        	<input type="number" inputmode="numeric" id="piecewise-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
+                        	<input type="number" inputmode="numeric" id="piecewise-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
                         </div>
 
                         <button onclick="plotPiecewiseFunction()" class="mt-2 p-3 btn-3d btn-green w-full">رسم کن</button>
@@ -1808,7 +1829,7 @@
                         	<span class="text-gray-500">پیش‌نمایش ضوابط تابع</span>
                         </div>
 
-                        <div id="math-piecewise-target" class="mt-2 item-center w-full h-96"></div>
+                        <div id="math-piecewise-target" class="mt-2 item-center w-full plot-height popIn"></div>
                     </div>
 
                     <div id="plot-comparison" class="plot-tab-content mt-4 space-y-2 hidden">
@@ -1823,13 +1844,11 @@
                         <button id="plotComparisonButton" onclick="addComparisonFormula()" class="p-2 btn-3d btn-blue w-full">+ افزودن تابع</button>
                         <p class="mt-4 mb-2">دامنۀ نهایی نمودار:</p>
                         <div class="grid grid-cols-2 flex items-center gap-2">
-                            	<input type="number" inputmode="tel" id="comparison-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
-                            	<input type="number" inputmode="tel" id="comparison-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
-
+                            <input type="number" inputmode="numeric" id="comparison-xMin" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداقل x">
+                            <input type="number" inputmode="numeric" id="comparison-xMax" class="plot-domain p-2 focus:outline-none border bg-white rounded-lg w-full text-center" dir="ltr" placeholder="حداکثر x">
                         </div>
-
                         <button onclick="plotComparisonFunctions()" class="mt-2 p-3 btn-3d btn-green w-full">رسم کن</button>
-                        <div id="math-comparison-target" class="mt-2 item-center w-full h-96"></div>
+                        <div id="math-comparison-target" class="mt-2 item-center w-full plot-height popIn"></div>
                     </div>
                 </div>
                 
@@ -2572,6 +2591,7 @@
 
             if (pageHistory[pageHistory.length - 1] !== pageId) {
                 pageHistory.push(pageId);
+                pushNewState();
             }
             window.scrollTo(0, 0);
         }
@@ -2707,8 +2727,32 @@
             else if (event.altKey && event.key === 'ArrowLeft') {
                 event.preventDefault(); // جلوگیری از رفتار پیش‌فرض (مثل رفتن به صفحه قبلی در مرورگر)
                 goBack();
+            } else if (event.key === 'BrowserBack') {
+                event.preventDefault();
+                goBack();
             }
         });
+
+        // ۱. وقتی ابزار یا منوی خاصی باز می‌شود، یک وضعیت جدید به تاریخچه اضافه کن
+        function pushNewState() {
+            window.history.pushState({ noBackExitsApp: true }, '');
+        }
+
+        // ۲. گوش دادن به رویداد بازگشت (هم دکمه فیزیکی گوشی، هم دکمه Back مرورگر)
+        window.addEventListener('popstate', (event) => {
+            // اگر تابعی برای بازگشت داری، اینجا صدا بزن
+            goBack();
+        });
+
+        // ۳. اصلاح تابع goBack خودت (اختیاری اما پیشنهادی)
+        // بهتر است وقتی دستی دکمه بستن را می‌زنی، تاریخچه را هم پاک کنی تا دکمه برگشت گوشی دو بار عمل نکند
+        const originalGoBack = goBack; 
+        goBack = function() {
+            // اگر هنوز در وضعیت جعلی هستیم، آن را به عقب برگردان
+            // این کار برای هماهنگی دکمه ضربدر روی صفحه و دکمه گوشی است
+            originalGoBack();
+        };
+
 
         // --- Event Listener for AI Input Enter Key ---
 	function isTouchDevice() {
@@ -3913,7 +3957,7 @@
                     const firstLine = lines.shift() || "";
                     const remainingText = lines.join('\n').replace(/\n/g, '<br>');
                     const styledOutput = `<div class="text-xl text-black-700 text-center mb-1">${firstLine}</div>
-        		<div dir="auto" class="justify text-black-700">${remainingText}</div>`;
+        		    <div dir="auto" class="justify text-black-700">${remainingText}</div>`;
                     outputEl.innerHTML = styledOutput;
                     outputEl.classList.remove('hidden');
                 } else {
@@ -3961,6 +4005,7 @@
                 tool.classList.remove('hidden');
                 tool.classList.remove('mt-6');
                 tool.classList.add('fadeIn-active');
+                pushNewState();
                 // اضافه کردن این بخش: اگر ابزار بردار انتخاب شد، Three.js را چک کن
                 if (toolId === 'vector-calculator') {
                     if (!scene) {
@@ -4116,6 +4161,7 @@
             document.getElementById('perimeter-shape-selection').classList.add('hidden');
             const shapeTool = document.getElementById(shapeId);
             shapeTool.classList.remove('hidden');
+            pushNewState();
             if (window.renderMathInElement) { renderMathInElement(shapeTool); }
         }
 
@@ -4278,6 +4324,7 @@
             document.getElementById('area-shape-selection').classList.add('hidden');
             const shapeTool = document.getElementById(shapeId);
             shapeTool.classList.remove('hidden');
+            pushNewState();
             if (window.renderMathInElement) { renderMathInElement(shapeTool); }
         }
 
@@ -4456,8 +4503,83 @@
                 "وارون مثلثاتی: asin(x), acos(x), atan(x) و ...\n" +
                 "مثلثاتی هذلولی: sinh(x), cosh(x), tanh(x) و ...\n" +
                 "لگاریتم: log10(x) (که 10 پایه یا مبنا است), log(x) (پایه e), log2(x) (پایه 2)؛ برای پایه‌های دیگر از قوانین لگاریتم استفاده کنید.\n" +
-                "ثابت‌ها: π=pi, e=E";
+                "ثابت‌ها: π=pi, e=E \n" +
+                "پیش‌نمایش فرمول تابع در پایین کادر ورودی ممکن‌الخطاست.";
             showMessageBox('راهنمای رسم نمودار', helpText);
+        }
+
+        // تابع کمکی برای تبدیل متن ریاضی به کد لاتکس
+        function mathToLatex(text) {
+            if (!text) return "";
+            let str = text;
+
+            // ۱. پیش‌پردازش ثابت‌ها و جایگزینی‌های ساده (بدون حلقه)
+            str = str.replace(/pi/g, '\\pi').replace(/E/g, 'e');
+            str = str.replace(/\*/g, ' \\cdot ');
+
+            // ۲. پردازش توابع تودرتو با محدود کردن تعداد تکرار (جلوگیری از هنگ)
+            const funcMap = [
+                { reg: /sqrt\(([^()]+)\)/g, res: '\\sqrt{$1}' },
+                { reg: /cbrt\(([^()]+)\)/g, res: '\\sqrt[3]{$1}' },
+                { reg: /abs\(([^()]+)\)/g, res: '\\left|{$1}\\right|' },
+                { reg: /exp\(([^()]+)\)/g, res: 'e^{$1}' },
+                { reg: /pow\(([^(),]+)\s*,\s*([^()]+)\)/g, res: '{$1}^{$2}' },
+                { reg: /log10\(([^()]+)\)/g, res: '\\log_{10}({$1})' },
+                { reg: /log2\(([^()]+)\)/g, res: '\\log_{2}({$1})' },
+                { reg: /log\(([^()]+)\)/g, res: '\\ln({$1})' },
+                { reg: /sin\(([^()]+)\)/g, res: '\\sin({$1})' },
+                { reg: /cos\(([^()]+)\)/g, res: '\\cos({$1})' },
+                { reg: /tan\(([^()]+)\)/g, res: '\\tan({$1})' },
+                { reg: /asin\(([^()]+)\)/g, res: '\\sin^{-1}({$1})' },
+                { reg: /acos\(([^()]+)\)/g, res: '\\cos^{-1}({$1})' },
+                { reg: /atan\(([^()]+)\)/g, res: '\\tan^{-1}({$1})' }
+            ];
+
+            let safetyCounter = 0;
+            while (safetyCounter < 25) { // حداکثر ۲۵ لایه تودرتو (برای امنیت)
+                let changed = false;
+                let prevStr = str;
+                
+                funcMap.forEach(f => {
+                    str = str.replace(f.reg, f.res);
+                });
+                
+                // مدیریت توان ساده x^y
+                str = str.replace(/([a-zA-Z0-9.\pi{}]+)\s*\^\s*([a-zA-Z0-9.\pi{}]+)/g, '{$1}^{$2}');
+
+                if (str === prevStr) break; // اگر در این دور تغییری ایجاد نشد، خارج شو
+                safetyCounter++;
+            }
+
+            // ۳. پردازش نهایی کسرها و تقسیم
+            // ابتدا تقسیم‌های داخل پرانتز را به فراک تبدیل می‌کنیم
+            str = str.replace(/\(([^()]+)\)\s*\/\s*\(([^()]+)\)/g, '\\frac{$1}{$2}');
+            str = str.replace(/([a-zA-Z0-9.\pi{}]+)\s*\/\s*([a-zA-Z0-9.\pi{}]+)/g, '\\frac{$1}{$2}');
+            str = str.replace(/\//g, ' \\div '); // اگر چیزی باقی ماند
+
+            return str;
+        }
+
+        function updateSimpleLatex() {
+            const input = document.getElementById('math-plot-input').value.trim();
+            const latexTarget = document.getElementById('math-simple-latex');
+            
+            if (!input) {
+                latexTarget.innerHTML = '<span class="text-gray-500">پیش‌نمایش فرمول تابع</span>';
+                return;
+            }
+
+            let latexCode = 'f(x) = ' + mathToLatex(input);
+
+            try {
+                if (typeof katex !== 'undefined') {
+                    katex.render(latexCode, latexTarget, { displayMode: true, throwOnError: false });
+                } else {
+                    latexTarget.textContent = latexCode;
+                }
+            } catch (e) {
+                console.error("Katex error:", e);
+            }
         }
 
 	    function getPlotDimensions(targetId) {
@@ -4473,16 +4595,26 @@
         }
 
         function getDomain(minId, maxId) {
-            const ixMin = document.getElementById(minId).value;
-            const ixMax = document.getElementById(maxId).value;
+            const ixMin = document.getElementById(minId).value.trim();
+            const ixMax = document.getElementById(maxId).value.trim();
+
             let xMin = -6;
             let xMax = 6;
-            if (ixMin !== '' && ixMax !== '') {
-                xMin = parseFloat(ixMin);
-                xMax = parseFloat(ixMax);
+
+            if (ixMin === '' || ixMax === '') {
+                return [xMin, xMax];
             }
+
+            xMin = parseFloat(ixMin);
+            xMax = parseFloat(ixMax);
+
+            if (isNaN(xMin) || isNaN(xMax)) {
+                showMessageBox('خطای دامنه', 'مقادیر وارد شده باید عددی باشند.');
+                return [-6, 6];
+            }
+
             return [xMin, xMax];
-	    }
+        }
 
         function plotMathFunction() {
             const target = '#math-plot-target';
@@ -4508,13 +4640,13 @@
             try {
                 // Process string for function-plot
                 let fnString = fn.replace(/\^/g, '**').replace(/pi/gi, 'PI');
-                const ixMin = document.getElementById('math-plot-xMin').value;
-                const ixMax = document.getElementById('math-plot-xMax').value;
+                const ixMin = document.getElementById('math-plot-xMin').value.trim();
+                const ixMax = document.getElementById('math-plot-xMax').value.trim();
                 let xMin = -6;
                 let xMax = 6;
                 if (ixMin !== '' && ixMax !== '') {
-                    xMin = ixMin;
-                    xMax = ixMax;
+                    xMin = parseFloat(ixMin);
+                    xMax = parseFloat(ixMax);
                 }
 
                 functionPlot({
@@ -4546,12 +4678,8 @@
                 <span class="font-bold text-slate-900">آنگاه</span>
                 <input type="text" class="piecewise-function p-2 border focus:outline-none bg-white rounded-lg text-left w-2/3" dir="ltr" placeholder="ضابطه (مثلاً -x)">
                 <button onclick="removePiecewiseFormula(this)" class="p-2 text-red-500 hover:text-red-700 shrink-0" title="حذف ضابطه">
-
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-
                 </button>
-
-
             `;
             container.appendChild(newFormulaDiv);
 
@@ -4574,33 +4702,7 @@
             formulas.forEach((formula, index) => {
                 const condition = formula.querySelector('.piecewise-condition').value.trim();
                 const fn = formula.querySelector('.piecewise-function').value.trim();
-
-                const latexFn = fn
-                    .replace(/\*/g, '\\cdot ')
-                    .replace(/pi/g, '\\pi')
-                    .replace(/E/g, 'e')
-                    .replace(/sqrt\((.+?)\)/g, '\\sqrt{$1}')
-                    .replace(/cbrt\((.+?)\)/g, '\\sqrt[3]{$1}')
-                    .replace(/abs\((.+?)\)/g, '{\\left|$1\\right|}')
-                    .replace(/exp\((.+?)\)/g, 'e^{$1}')
-                    .replace(/pow\(([^,]*?)\s*,\s*([^)]*?)\)/g, '{$1}^{$2}')
-                    .replace(/log10\((.+?)\)/g, '\\log_{10}({$1})')
-                    .replace(/log2\((.+?)\)/g, '\\log_{2}({$1})')
-                    .replace(/log\((.+?)\)/g, '\\ln({$1})')
-                    .replace(/asin\((.+?)\)/g, '{\\sin}^{-1}({$1})')
-                    .replace(/acos\((.+?)\)/g, '{\\cos}^{-1}({$1})')
-                    .replace(/atan\((.+?)\)/g, '{\\tan}^{-1}({$1})')
-                    .replace(/sin\((.+?)\)/g, '\\sin({$1})')
-                    .replace(/cos\((.+?)\)/g, '\\cos({$1})')
-                    .replace(/tan\((.+?)\)/g, '\\tan({$1})')
-                    .replace(/sinh\((.+?)\)/g, '\\sinh({$1})')
-                    .replace(/cosh\((.+?)\)/g, '\\cosh({$1})')
-                    .replace(/tanh\((.+?)\)/g, '\\tanh({$1})')
-                    .replace(/sign\((.+?)\)/g, '\\text{sgn}({$1})')
-                    .replace(/\(([^()]+)\)\s*\/\s*\(([^()]+)\)/g, '\\frac{$1}{$2}')
-                    .replace(/([a-zA-Z0-9\s]+)\s*\/\s*\(([^()]+)\)/g, '\\frac{$1}{$2}')
-                    .replace(/\(([^()]+)\)\s*\/\s*([a-zA-Z0-9\s]+)/g, '\\frac{$1}{$2}')
-                    .replace(/([a-zA-Z0-9\s]+)\s*\/\s*([a-zA-Z0-9\s]+)/g, '\\frac{$1}{$2}')
+                const latexFn = mathToLatex(fn);
                 const latexCond = condition.replace(/<|<=|>=|>/g, (match) => {
                     if (match === '<=') return '\\le';
                     if (match === '>=') return '\\ge';
@@ -4731,9 +4833,7 @@
             newFormulaDiv.innerHTML = `
                 <input type="text" class="comp-function p-2 border border-${colors}-400 text-${colors}-700 bg-plotformula pr-3 focus:outline-none rounded-lg text-left w-full" dir="ltr" placeholder="${name}(x)=">
                 <button onclick="removeComparisonFormula(this)" class="p-2 text-red-500 hover:text-red-700 shrink-0" title="حذف تابع">
-
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-
                 </button>
 
 
@@ -4778,6 +4878,7 @@
                     	fn: processFnString(fn),
                     	color: plotColors[index % plotColors.length],
                     	graphType: 'polyline',
+                        sampler: 'builtIn',
                     });
                 }
             });
@@ -4794,7 +4895,7 @@
                     data: plotData,
                     grid: true,
                     tip: { xLine: true, yLine: true },
-                    xAxis: { domain: [xMin, xMax], label: 'x' },
+                    xAxis: { domain: [parseFloat(xMin), parseFloat(xMax)], label: 'x' },
                     yAxis: { label: 'y' },
                 });
             } catch (err) {
@@ -4863,6 +4964,7 @@
             document.getElementById('volume-shape-selection').classList.add('hidden');
             const shapeTool = document.getElementById(shapeId);
             shapeTool.classList.remove('hidden');
+            pushNewState();
             if (window.renderMathInElement) { renderMathInElement(shapeTool); }
         }
         
@@ -5535,7 +5637,6 @@
 // برای اطمینان از به روز رسانی هنگام تغییر حالت سیستم
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         initializeVennDiagram();
-
     });
 
     function drawVennDiagram() {
@@ -6383,6 +6484,7 @@
         if(tool) {
             tool.classList.remove('hidden');
             tool.classList.add('fadeIn-active');
+            pushNewState();
             if (window.renderMathInElement) {
                 renderMathInElement(tool);
             }
@@ -6407,6 +6509,7 @@
         if (branchTool) {
             branchTool.classList.remove('hidden');
             branchTool.classList.add('fadeIn-active');
+            pushNewState();
             // Re-render KaTeX in case the new branchTool has static formulas
             if (window.renderMathInElement) {
                 renderMathInElement(branchTool);
@@ -6433,6 +6536,7 @@
         if(subBranchTool) {
             subBranchTool.classList.remove('hidden');
             subBranchTool.classList.add('fadeIn-active');
+            pushNewState();
             // Re-render KaTeX in case the new subBranchTool has static formulas
             if (window.renderMathInElement) {
                 renderMathInElement(subBranchTool);
@@ -6845,6 +6949,7 @@
         if(tool) {
             tool.classList.remove('hidden');
             tool.classList.add('fadeIn-active');
+            pushNewState();
             // Re-render KaTeX in case the new tool has static formulas
             if (window.renderMathInElement) {
                 renderMathInElement(tool);
@@ -6876,14 +6981,11 @@
         }
 
 	document.addEventListener('keydown', function(event) {
-
-	
-    if (event.key === 'Enter' && messageBoxContainer.classList.contains('visible')) {
-
-	        event.preventDefault();
-	        hideMessageBox();
-	}
-});
+        if (event.key === 'Enter' && messageBoxContainer.classList.contains('visible')) {
+            event.preventDefault();
+            hideMessageBox();
+        }
+    });
 
         function parseAndStyleResponse(text) {
             let html = text;
